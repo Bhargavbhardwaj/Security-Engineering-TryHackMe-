@@ -1,1 +1,88 @@
 
+# DevSecOps
+
+## 1. Introduction
+
+DevSecOps stands for Development, Security, and Operations.
+
+It is the practice of integrating security into every stage of the Software Development Lifecycle (SDLC).
+
+Instead of adding security at the end, DevSecOps ensures security is continuous and automated.
+
+---
+
+## 2. Why DevSecOps?
+
+Traditional development models treated security as a final step.
+
+Problems:
+- Late vulnerability detection
+- Expensive fixes
+- Deployment delays
+
+DevSecOps solves this by:
+- Shift-left security
+- Automation
+- Continuous monitoring
+
+---
+
+## 3. DevSecOps Lifecycle
+
+Security is integrated in:
+
+- Planning
+- Coding
+- Building
+- Testing
+- Deployment
+- Monitoring
+
+---
+
+## 4. Important DevSecOps Tools
+
+### SAST (Static Application Security Testing)
+- Scans source code
+- Finds vulnerabilities early
+
+### DAST (Dynamic Application Security Testing)
+- Tests running application
+- Finds runtime issues
+
+### SCA (Software Composition Analysis)
+- Detects vulnerable third-party libraries
+
+### Container Scanning
+- Checks Docker images for vulnerabilities
+
+---
+
+## 5. CI/CD Security
+
+Security checks added in CI/CD pipeline:
+
+- Code scanning
+- Dependency checks
+- Secret detection
+- Automated testing
+- Image scanning
+
+---
+
+## 6. Key Concepts Learned
+
+- Security is shared responsibility
+- Automation is critical
+- Continuous monitoring is required
+- DevSecOps reduces risk in production
+
+---
+
+## 7. Real-World Application
+
+DevSecOps is widely used in:
+- Cloud environments
+- Microservices architecture
+- SaaS companies
+- FinTech platforms
