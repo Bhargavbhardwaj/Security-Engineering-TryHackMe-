@@ -46,3 +46,6 @@ The core vulnerability was Sensitive Data Exposure within the application's sour
 
 ## Security Concept
 This room demonstrates poor configuration management and improper access control.
+
+-- fixed git email issue
+
