@@ -22,14 +22,14 @@ All content is based on hands-on labs and research done while learning.
 ---
 
 ## 📂 Modules Covered
-- OWASP API Security TOP 10
-- DevSecOps
-- Threat Modeling
-- Infrastructure as Code Security
+- Introduction to security-engineering
+- Network and System security (secure network architecture, AD hardening, Linux hardening, network protocols, into to cloud security)
+- Threats adn Risks (Threat Modelling, vulnerability and risk management, GRC)
+- Software Security (OWASP API Security TOP 10, SSDLC, SAST, DAST, Intro to DevOps)
 - Container Security
 - Cloud Security Basics
-- Threats adn Risks
-- Network and System security
+- OWASP TOP 10 (2025)
+  
 
 ---
 
