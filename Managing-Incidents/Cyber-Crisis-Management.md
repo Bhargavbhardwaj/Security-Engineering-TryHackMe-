@@ -50,3 +50,6 @@ In this room, we have learned about how a crisis management team deals with a cy
 - The CMT has to make the most of the Golden Hour to ensure that crucial time is not lost to deal with the crisis.
 - The CMT follows a process of receiving updates on the crisis scope and discussing the crisis before taking action to help close the crisis.
 - Subject Matter Experts play an important role in providing critical information to the CMT to help them better understand the scope of the crisis and take the appropriate actions to deal with it.
+
+
+## With this, I completed the Security-Engineer learning path from tryhackme.
