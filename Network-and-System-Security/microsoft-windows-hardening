@@ -1,0 +1,240 @@
+# 🛡 Microsoft Windows Hardening – Complete Practical Learning Report  
+**Path:** Security Engineer  
+**Platform:** TryHackMe  
+**Author:** Bhargav Bhardwaj  
+**Domain Focus:** Enterprise Endpoint Security & Blue Team Operations  
+
+---
+
+# 📌 Introduction
+
+Microsoft Windows Hardening is the process of securing a Windows operating system by reducing its attack surface, enforcing strict access controls, disabling unnecessary services, and applying security best practices.
+
+This report consolidates all major hardening areas into a **single structured document**, covering:
+
+- Identity & Access Management  
+- Network Management  
+- Application Management  
+- Storage & Compute Security  
+- Importance of Updating Windows  
+- Windows Hardening Cheat Sheet  
+
+The objective is to create a **secure baseline configuration** suitable for enterprise and SOC environments.
+
+---
+
+# 1️⃣ Identity & Access Management (IAM)
+
+Identity & Access Management ensures that only authorized users can access specific resources using the **principle of least privilege**.
+
+---
+
+## 🔐 Password Policy Configuration
+
+Tool: `secpol.msc`  
+Path:  
+`Account Policies → Password Policy`
+
+Recommended Configuration:
+- Minimum password length: 12–14 characters  
+- Enforce password history: 5–10 passwords  
+- Maximum password age: 60–90 days  
+- Password complexity: Enabled  
+
+Verify configuration:
+```powershell
+net accounts
+
+🔐 Account Lockout Policy
+
+Path:
+Account Policies → Account Lockout Policy
+
+Recommended:
+
+Lockout threshold: 5 failed attempts
+Lockout duration: 15–30 minutes
+Reset counter after: 15 minutes
+Purpose: Prevents automated login attacks.
+
+🔐 Managing Default & Privileged Accounts
+
+Disable built-in administrator:
+net user administrator /active:no
+
+Best Practices:
+
+Rename default Administrator account
+Disable Guest account
+Remove inactive users
+Regularly audit privileged accounts
+Check administrators group:
+net localgroup administrators
+
+🔐 Least Privilege Implementation
+
+Remove unnecessary users from Local Administrators group
+Use separate admin accounts for administrative tasks
+Avoid using Domain Admin for daily activities
+Apply Role-Based Access Control (RBAC)
+
+🔐 Credential Protection
+
+Enable Credential Guard
+Disable NTLM where possible
+Prefer Kerberos authentication
+Enforce Multi-Factor Authentication (MFA)
+
+2️⃣ Network Management
+
+Network hardening prevents unauthorized access and lateral movement.
+
+🌐 Windows Firewall Configuration
+Enable firewall profiles:
+
+Get-NetFirewallProfile
+Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled True
+
+Best Practices:
+Block inbound traffic by default
+Allow only necessary ports (e.g., 443 for HTTPS)
+Restrict administrative services
+
+🌐 Secure Remote Desktop (RDP)
+Open RDP settings:
+
+SystemPropertiesRemote.exe
+
+Security Measures:
+Enable Network Level Authentication (NLA)
+Restrict RDP via firewall rules
+Allow only specific IP addresses
+Disable RDP if not required
+
+🌐 Disable SMBv1
+Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol
+Reason: SMBv1 is outdated and vulnerable to ransomware exploits.
+
+🌐 Disable Unnecessary Services
+
+Open Services Manager:
+services.msc
+Review and disable:
+Remote Registry
+Telnet
+Print Spooler (if unused)
+Reducing active services lowers attack surface.
+
+3️⃣ Application Management
+
+Applications are common attack vectors; controlling execution reduces compromise risk.
+
+🧩 Application Control (AppLocker / WDAC)
+Allow only signed or approved applications
+Restrict unknown executables
+Block unauthorized scripts
+
+🧩 Remove Unnecessary Software
+List installed programs:
+Get-WmiObject -Class Win32_Product
+Remove unused software via:
+Control Panel → Programs & Features
+
+🧩 Restrict PowerShell Usage
+Set execution policy:
+Set-ExecutionPolicy RemoteSigned
+
+Enable:
+Script Block Logging
+Module Logging
+Purpose: Detect and monitor malicious PowerShell activity.
+
+🧩 Regular Application Updates
+Ensure regular updates for:
+Web browsers
+Microsoft Office
+Third-party applications
+Outdated software is a primary attack vector.
+
+4️⃣ Storage & Compute Security
+
+Protecting stored data and system resources prevents data breaches and unauthorized access.
+
+💾 Enable BitLocker
+Check status:
+manage-bde -status
+Best Practices:
+Encrypt system drive
+Store recovery keys securely
+Use TPM for hardware-backed encryption
+
+💾 Configure NTFS Permissions
+Path:
+Right-click Folder → Properties → Security → Advanced
+
+Best Practices:
+Remove "Everyone" group
+Assign permissions based on roles
+Enable auditing for sensitive folders
+
+💾 Disable Autorun
+Open:
+gpedit.msc
+
+Path:
+Computer Configuration → Administrative Templates → Windows Components → AutoPlay Policies
+Purpose: Prevent USB-based malware execution.
+
+💾 Resource Monitoring
+
+Use:
+Task Manager
+Resource Monitor
+Performance Monitor
+
+Purpose:
+Detect abnormal CPU, memory, or disk activity indicating compromise.
+
+5️⃣ Importance of Updating Windows
+
+Regular updates patch vulnerabilities and protect systems from exploitation.
+
+🛡 Why Updates Are Critical
+
+Patch zero-day vulnerabilities
+Prevent ransomware exploitation
+Fix privilege escalation flaws
+Update Defender security intelligence
+Check update logs:
+Get-WindowsUpdateLog
+Enterprise-level solutions:
+WSUS
+Centralized patch management systems
+Unpatched systems are one of the most common causes of security breaches.
+
+6️⃣ Windows Hardening Cheat Sheet
+Category	Action	Tool / Command
+Password Policy	Enforce 12+ characters	secpol.msc
+Account Lockout	5 failed attempts	secpol.msc
+Disable Admin	Disable default admin	net user administrator /active:no
+Firewall	Enable firewall	Set-NetFirewallProfile
+RDP	Enable NLA & restrict access	SystemPropertiesRemote
+SMB	Disable SMBv1	Disable-WindowsOptionalFeature
+Encryption	Enable BitLocker	manage-bde
+PowerShell	Restrict execution	Set-ExecutionPolicy
+Services	Disable unused services	services.msc
+Updates	Enable automatic updates	Windows Update
+
+📌 Security Principles Reinforced
+
+Defense in Depth
+Least Privilege
+Attack Surface Reduction
+Secure Baseline Configuration
+Continuous Monitoring & Patch Management
+
+✅ Final Conclusion
+
+Microsoft Windows Hardening is a foundational defensive security practice required in enterprise environments. Implementing strong IAM policies, firewall controls, secure application execution, encryption, logging, and regular updates significantly strengthens Windows endpoints against modern cyber threats.
+
+This module strengthens essential Blue Team skills required for SOC Analyst and Security Engineer roles and builds a solid foundation for enterprise security operations.
